@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  transmission-daemon:
+    image: ${DOCKER_REGISTRY}monstrenyatko/transmission-daemon
+    container_name: transmission-daemon
+    #environment:
+    #  - TRANSMISSION_DAEMON_UID=1000
+    #  - TRANSMISSION_DAEMON_GID=1000
+    restart: unless-stopped
+    ports:
+      - 9091:9091
+    volumes:
+      - transmission-daemon-config:/var/lib/transmission/config
+      - ${TRANSMISSION_DAEMON_DOWNLOADS}:/var/lib/transmission/downloads
+
+volumes:
+  transmission-daemon-config:
