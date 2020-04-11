@@ -42,6 +42,8 @@ The web interface is available on `http://<ip-address>:9091/transmission/web`.
     ```sh
       export DOCKER_REGISTRY="my_registry_hostname:5000/"
     ```
+  - `NET_GW`: [**OPTIONAL**] the network default GW to be used instead of one assigned by `Docker`.
+  This option requires `--cap-add=NET_ADMIN`
 * Pull prebuilt `Docker` image:
 
   ```sh

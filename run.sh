@@ -34,7 +34,7 @@ if [ -n "$APP_GID" ] && [ "$APP_GID" != "$(id $APP_GROUPNAME -g)" ]; then
   usermod --gid $APP_GID $APP_USERNAME
 fi
 
-if [ -n "$APP_UID" ] && [ "$APP_UID" !=  "$(id $APP_USERNAME -u)" ]; then
+if [ -n "$APP_UID" ] && [ "$APP_UID" != "$(id $APP_USERNAME -u)" ]; then
   set +e
   # delete all users using requested UID
   cut -d: -f1,3 /etc/passwd | grep -w $APP_UID |
@@ -46,6 +46,11 @@ if [ -n "$APP_UID" ] && [ "$APP_UID" !=  "$(id $APP_USERNAME -u)" ]; then
   set -e
   #
   usermod --uid $APP_UID $APP_USERNAME
+fi
+
+if [ -n "$NET_GW" ]; then
+  ip route del default
+  ip route add default via $NET_GW
 fi
 
 if [ "$1" = 'transmission-daemon-app' ]; then
