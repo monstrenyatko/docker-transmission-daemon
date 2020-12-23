@@ -1,16 +1,23 @@
-FROM alpine:3
+FROM monstrenyatko/alpine
 
-MAINTAINER Oleg Kovalenko <monstrenyatko@gmail.com>
+LABEL maintainer="Oleg Kovalenko <monstrenyatko@gmail.com>"
 
-RUN apk update && apk upgrade && \
-    apk add --no-cache transmission-daemon curl bash su-exec shadow && \
+RUN apk update && \
+    apk add transmission-daemon && \
+    # clean-up
     rm -rf /root/.cache && mkdir -p /root/.cache && \
-    rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
+    rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
 
-COPY run.sh app-entrypoint.sh /
-RUN chmod +x /run.sh /app-entrypoint.sh
+ENV APP_NAME="transmission-daemon-app" \
+    APP_BIN="transmission-daemon" \
+    APP_USERNAME="transmission" \
+    APP_GROUPNAME="transmission"
 
+COPY run.sh /app/
 COPY settings.json /var/lib/transmission/config/
+RUN chown -R root:root /app
+RUN chmod -R 0744 /app
+RUN chmod 0755 /app/run.sh
 
 HEALTHCHECK --interval=60s --timeout=15s --start-period=120s \
     CMD curl -L 'https://api.ipify.org'
@@ -21,5 +28,5 @@ EXPOSE 9091
 
 WORKDIR /var/lib/transmission
 
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["/app/run.sh"]
 CMD ["transmission-daemon-app", "--foreground", "--config-dir", "/var/lib/transmission/config"]

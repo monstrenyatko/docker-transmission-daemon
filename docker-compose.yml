@@ -4,8 +4,8 @@ services:
     image: ${DOCKER_REGISTRY}monstrenyatko/transmission-daemon
     container_name: transmission-daemon
     environment:
-     - TRANSMISSION_DAEMON_UID
-     - TRANSMISSION_DAEMON_GID
+     - APP_UID=${TRANSMISSION_DAEMON_UID}
+     - APP_GID=${TRANSMISSION_DAEMON_GID}
     restart: unless-stopped
     ports:
       - 9091:9091
