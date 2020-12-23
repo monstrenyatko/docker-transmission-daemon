@@ -49,7 +49,7 @@ if [ -n "$APP_UID" ] && [ "$APP_UID" != "$(id $APP_USERNAME -u)" ]; then
 fi
 
 if [ -n "$NET_GW" ]; then
-  ip route del default
+  ip route del default || true
   ip route add default via $NET_GW
 fi
 
