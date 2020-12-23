@@ -1,7 +1,7 @@
 Transmission daemon Docker image
 ================================
 
-[![Build Status](https://travis-ci.org/monstrenyatko/docker-transmission-daemon.svg?branch=master)](https://travis-ci.org/monstrenyatko/docker-transmission-daemon)
+[![](https://github.com/monstrenyatko/docker-transmission-daemon/workflows/ci/badge.svg?branch=master)](https://github.com/monstrenyatko/docker-transmission-daemon/actions?query=workflow%3Aci)
 
 About
 =====
