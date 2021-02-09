@@ -20,7 +20,8 @@ fi
 if [ "$1" = $APP_NAME ]; then
   shift;
   mkdir -p /var/run/transmission /var/lib/transmission/config /var/lib/transmission/downloads /var/lib/transmission/downloads/watch
-  chown -R $APP_USERNAME:$APP_GROUPNAME /var/run/transmission /var/lib/transmission
+  chown $APP_USERNAME /var/lib/transmission /var/lib/transmission/downloads /var/lib/transmission/downloads/watch
+  chown -R $APP_USERNAME /var/run/transmission /var/lib/transmission/config
   exec /scripts/app-entrypoint.sh $APP_BIN "$@"
 fi
 
