@@ -14,7 +14,7 @@ ENV APP_NAME="transmission-daemon-app" \
     APP_GROUPNAME="transmission"
 
 COPY run.sh /app/
-COPY settings.json /var/lib/transmission/config/
+COPY settings.json /app/settings.json.default
 RUN chown -R root:root /app
 RUN chmod -R 0744 /app
 RUN chmod 0755 /app/run.sh
