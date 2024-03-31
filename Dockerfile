@@ -1,9 +1,9 @@
-FROM monstrenyatko/alpine
+FROM monstrenyatko/alpine:2024-03-31
 
 LABEL maintainer="Oleg Kovalenko <monstrenyatko@gmail.com>"
 
 RUN apk update && \
-    apk add transmission-daemon && \
+    apk add transmission-daemon~=4.0.5 && \
     # clean-up
     rm -rf /root/.cache && mkdir -p /root/.cache && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
