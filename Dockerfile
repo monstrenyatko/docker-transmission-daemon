@@ -3,7 +3,7 @@ FROM monstrenyatko/alpine:2025-03-01
 LABEL maintainer="Oleg Kovalenko <monstrenyatko@gmail.com>"
 
 RUN apk update && \
-    apk add transmission-daemon~=4.0.5 && \
+    apk add transmission-daemon && \
     # clean-up
     rm -rf /root/.cache && mkdir -p /root/.cache && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
